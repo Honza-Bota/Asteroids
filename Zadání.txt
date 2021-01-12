@@ -1,0 +1,21 @@
+Vytvořit Xamarin Apk co bude zobrazovat data z api Nasa (https://api.nasa.gov/).
+
+
+Asteroidy
+
+Termín: 8. leden 2021 23:59
+
+Pokyny
+
+Vytvořte mobilní aplikaci pro Android, která bude zobrazovat informace o tělesech v blízkosti Země. 
+Aplikaci vytvořte tak, aby zpracovávala otevřená data NASA poskytnutá ve formě JSON API. 
+Data aktualizujte při dostupném datovém připojení. Pokud není připojení dostupné, 
+použijte poslední aktualizovaná data a zobrazte poslední datum aktualizace.
+
+Etapy:
+1. Dokument Návrh aplikace, který popisuje funkčnost aplikace, její formuláře(schematicky) a přechody mezi nimi. Rozsah do 2 x A4 (do 18. 12.)
+2. Aplikace spustitelná na Androidu.
+
+Pokud se vám nepodařilo konfigurovat prostředí pro vývoj v Xamarin Forms, použijte Microsoft WPF.
+
+Pokud máte alternativní návrh aplikace s využitím jiného API, je nutné to navrhnout v 1. etapě a podléhá to schválení vyučujícího.
