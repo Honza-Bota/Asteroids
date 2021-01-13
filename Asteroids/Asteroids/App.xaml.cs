@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Asteroids.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Asteroids
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new AllAsteroidsPage());
         }
 
         protected override void OnStart()
