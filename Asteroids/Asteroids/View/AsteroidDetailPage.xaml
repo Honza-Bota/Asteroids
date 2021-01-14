@@ -2,40 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Asteroids.View.AsteroidDetailPage"
-             Title="Asteroid details">
+             Title="Asteroid detail">
     <ContentPage.Content>
-        <StackLayout Spacing="10">
-            <Frame CornerRadius="4" HasShadow="True" Padding="20" Margin="20">
-                <StackLayout Spacing="5"  BackgroundColor="White">
-                    <Label x:Name="Name" Text="{Binding Name}" FontSize="24" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                    <Label x:Name="Id" Text="{Binding Id}" FontSize="14" TextColor="Gray"></Label>
+        <StackLayout>
+            <Frame CornerRadius="10" HasShadow="True" Padding="20" Margin="20" BackgroundColor="White">
+                <StackLayout>
+                    <Label Text="{Binding Id}" FontSize="8" Margin="0,0,0,-5" TextColor="Gray" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                    <Label Text="{Binding Name}" FontSize="28" Margin="0,0,0,10" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                    <Label Text="Odhadovaný průměr:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Estimated_diameter_M" Text="{Binding Estimated_diameter_M}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Odhadovaný průměr:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Estimated_diameter_M}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Nebezpečný" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Hazardous" Text="{Binding Hazardous}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Nebezpečný:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Hazardous}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Nejbližší přílet:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Close_approach_date" Text="{Binding Close_approach_date}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Nejbližší přílet:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Close_approach_date}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Reativní rychlost:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Relative_velocity_KmPs" Text="{Binding Relative_velocity_KmPs}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Reativní rychlost:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Relative_velocity_KmPs}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Vzdálenost:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Miss_distance_Km" Text="{Binding Miss_distance_Km}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Vzdálenost:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Miss_distance_Km}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Těleso:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Orbiting_body" Text="{Binding Orbiting_body}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Těleso:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Orbiting_body}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="První pozorování:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="First_observation_date" Text="{Binding First_observation_date}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="První pozorování:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding First_observation_date}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Poslední pozorování:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Last_observation_date" Text="{Binding Last_observation_date}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Poslední pozorování:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Last_observation_date}" FontSize="14" TextColor="Gray"/>
 
-                    <Label Text="Sledovaný objekt:" FontSize="16" TextColor="Gray" FontAttributes="Bold"></Label>
-                    <Label x:Name="Sentry_object" Text="{Binding Sentry_object}" FontSize="14" TextColor="Gray"></Label>
+                    <Label Text="Sledovaný objekt:" FontSize="16" TextColor="DarkGray" FontAttributes="Bold"/>
+                    <Label Text="{Binding Sentry_object}" FontSize="14" TextColor="Gray"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

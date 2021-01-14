@@ -4,21 +4,19 @@
              x:Class="Asteroids.View.AllAsteroidsPage"
              Title="Asteroids">
     <ContentPage.Content>
-        <StackLayout Spacing="10">
-            <Label x:Name="update" Margin="10,10,10,-5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-            <ListView x:Name="l_asteroids" ItemsSource="{Binding Asteroids}" HasUnevenRows="True" ItemTapped="Handle_ItemTapped">
+        <StackLayout>
+            <Label Text="{Binding LastUpdate, StringFormat='Last update: {0:N}'}" Margin="10,10,10,-10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <ListView x:Name="lwAsteroids" ItemsSource="{Binding Asteroids}" HasUnevenRows="True" ItemTapped="Handle_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <ViewCell.View>
-                                <Frame CornerRadius="4" HasShadow="True" Padding="20" Margin="20">
-                                    <StackLayout Spacing="5"  BackgroundColor="White">
-                                        <Label Text="{Binding Name}" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
-                                        <Label Text="{Binding Id, StringFormat='ID: {0:N}'}" FontSize="14" TextColor="Gray"></Label>
-                                        <Label Text="{Binding Hazardous, StringFormat='Nebezpečný: {0:N}'}" FontSize="14" TextColor="Gray"></Label>
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell.View>
+                            <Frame CornerRadius="30" HasShadow="True" Padding="20" Margin="20" BackgroundColor="Snow">
+                                <StackLayout>
+                                     <Label Text="{Binding Name}" FontSize="20" TextColor="Black" FontAttributes="Bold"/>
+                                     <Label Text="{Binding Hazardous, StringFormat='Nebezpečný: {0:N}'}" FontSize="14" TextColor="Gray"/>
+                                     <Label Text="{Binding Id, StringFormat='ID: {0:N}'}" FontSize="6" TextColor="LightGray"/>
+                                </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

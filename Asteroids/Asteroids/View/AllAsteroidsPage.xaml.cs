@@ -6,27 +6,39 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Asteroids.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AllAsteroidsPage : ContentPage
+    public partial class AllAsteroidsPage : ContentPage, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         List<Asteroid> asteroids;
+        DataControl dtc;
+        private string lastUpdate1;
+        public string LastUpdate 
+        { 
+            get { return lastUpdate1; } 
+            set 
+            {
+                lastUpdate1 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastUpdate"));
+            }
+        }
+
         public AllAsteroidsPage()
         {
             InitializeComponent();
+            dtc = new DataControl();
 
-            NasaDataService nasaDataService = new NasaDataService();
+            asteroids = dtc.GetAllAsteroids();
+            lwAsteroids.ItemsSource = asteroids;
+            BindingContext = this;
 
-            asteroids = nasaDataService.GetAsteroids();
-
-            l_asteroids.ItemsSource = asteroids;
-
-            update.Text = DateTime.Now.ToString();
+            LastUpdate = DateTime.Now.ToString();
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -36,7 +48,6 @@ namespace Asteroids.View
 
             Application.Current.MainPage.Navigation.PushAsync(new AsteroidDetailPage(e.Item as Asteroid));
 
-            //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
     }
