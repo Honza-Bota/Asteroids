@@ -44,11 +44,9 @@ namespace Asteroids.View
         public AllAsteroidsPage()
         {            
             InitializeComponent();
-
             dataControl = new DataControl();
 
-            Asteroids = dataControl.GetAllAsteroids();
-            LastUpdate = DateTime.Now.ToString();
+            Asteroids = dataControl.GetAllAsteroids(out _lastUpdate);
 
             lwAsteroids.ItemsSource = Asteroids;
             BindingContext = this;

@@ -6,30 +6,47 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
+using System.Diagnostics;
+using Xamarin.Forms;
 
 namespace Asteroids.ViewModel
 {
     class DataControl
     {
-        const string API = "https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=XIjJ0o45nFWPaEhXubCOZJ3LISFNwyH9ffmaeuu5";
+        const string api = "https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=XIjJ0o45nFWPaEhXubCOZJ3LISFNwyH9ffmaeuu5";
+        bool edit = false;
 
-        public List<Asteroid> GetAllAsteroids()
+        public List<Asteroid> GetAllAsteroids(out string _lastUpdate)
         {                
             //vytvoření listu asteroidů a navrácení do formu
-            try { return ConvertResponseToAsteroids(DownloadData().Result); }
+            try 
+            { 
+                List<Asteroid> asteroids = ConvertResponseToAsteroids(DownloadData().Result);
+                _lastUpdate = edit ? Application.Current.Properties["updateDate"].ToString() : DateTime.Now.ToString();
+                return asteroids;
+            }
             catch (Exception err) { throw new Exception(err.Message); }
         }
 
-        public async Task<NasaApiResponse> DownloadData()
+        async Task<NasaApiResponse> DownloadData()
         {
             //stažení a deserialzace jsonu
             HttpClient httpc = new HttpClient();
 
             try
             {
-                HttpResponseMessage httpResponseMessage = await httpc.GetAsync(API).ConfigureAwait(false);
-                httpResponseMessage.EnsureSuccessStatusCode();
-                string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                string json;
+                HttpResponseMessage httpResponseMessage = await httpc.GetAsync(api).ConfigureAwait(false);
+                //httpResponseMessage.EnsureSuccessStatusCode();
+                if (httpResponseMessage.IsSuccessStatusCode == false)
+                {
+                    json = Application.Current.Properties["oldJson"].ToString();
+                    edit = true;
+                }
+                json = await httpResponseMessage.Content.ReadAsStringAsync();
+                SaveJson(json, DateTime.Now);
+                edit = false;
                 return JsonConvert.DeserializeObject<NasaApiResponse>(json);
             }
             catch (HttpRequestException err)
@@ -37,6 +54,16 @@ namespace Asteroids.ViewModel
 
                 throw new HttpRequestException(err.Message);
             }
+        }
+
+        private void SaveJson(string json, DateTime now)
+        {
+            Application.Current.Properties["oldJson"] = json;
+            Application.Current.Properties["updateDate"] = now.Ticks;
+
+            Application.Current.SavePropertiesAsync();
+
+            //Debug.Print(Application.Current.Properties.Count.ToString()+"azor");
         }
 
         private List<Asteroid> ConvertResponseToAsteroids(NasaApiResponse response)
@@ -65,12 +92,11 @@ namespace Asteroids.ViewModel
             return asteroids;
         }
 
-        internal List<Asteroid> Update(out string lastUpdate)
+        public List<Asteroid> Update(out string lastUpdate)
         {
             List<Asteroid> asteroids;
 
-            asteroids = GetAllAsteroids();
-            lastUpdate = DateTime.Now.ToString();
+            asteroids = GetAllAsteroids(out lastUpdate);
 
             return asteroids;
         }
