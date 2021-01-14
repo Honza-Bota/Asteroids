@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Asteroids.View.LoadingPage"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Margin="20,150,20,10" CornerRadius="5">
+                <StackLayout>
+                    <Label Text="ASTEROIDS" FontSize="50" Margin="10,50,10,10" FontAttributes="Bold" TextColor="DeepSkyBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                     <Label Text="Loading..." Margin="10,100,10,100" FontSize="20" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

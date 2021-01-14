@@ -19,7 +19,6 @@ namespace Asteroids.View
 
         DataControl dataControl;
 
-
         List<Asteroid> _asteroids;
         private string _lastUpdate;
         public string LastUpdate 
@@ -43,8 +42,9 @@ namespace Asteroids.View
 
 
         public AllAsteroidsPage()
-        {
+        {            
             InitializeComponent();
+
             dataControl = new DataControl();
 
             Asteroids = dataControl.GetAllAsteroids();
@@ -56,7 +56,8 @@ namespace Asteroids.View
             UpdateData();
         }
 
-        private void UpdateData()
+
+        void UpdateData()
         {
             string lastUpdate = "";
             Device.StartTimer(TimeSpan.FromMinutes(2), () =>
@@ -80,7 +81,6 @@ namespace Asteroids.View
             //});
             
         }
-
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
