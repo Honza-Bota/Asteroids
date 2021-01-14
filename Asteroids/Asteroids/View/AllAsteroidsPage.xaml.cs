@@ -59,15 +59,26 @@ namespace Asteroids.View
         private void UpdateData()
         {
             string lastUpdate = "";
-            Task.Run(() =>
+            Device.StartTimer(TimeSpan.FromMinutes(2), () =>
             {
-                while (true)
+                Task.Run(() =>
                 {
                     Asteroids = dataControl.Update(out lastUpdate);
                     LastUpdate = lastUpdate;
-                    Thread.Sleep(TimeSpan.FromMinutes(2));
-                }
+                });
+                return true;
             });
+            //Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        Thread.Sleep(TimeSpan.FromMinutes(2));
+            //
+            //        Asteroids = dataControl.Update(out lastUpdate);
+            //        LastUpdate = lastUpdate;
+            //    }
+            //});
+            
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
