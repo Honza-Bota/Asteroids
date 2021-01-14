@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading;
 
 namespace Asteroids.View
 {
@@ -16,29 +17,57 @@ namespace Asteroids.View
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        List<Asteroid> asteroids;
-        DataControl dtc;
-        private string lastUpdate1;
+        DataControl dataControl;
+
+
+        List<Asteroid> _asteroids;
+        private string _lastUpdate;
         public string LastUpdate 
         { 
-            get { return lastUpdate1; } 
+            get { return _lastUpdate; } 
             set 
             {
-                lastUpdate1 = value;
+                _lastUpdate = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastUpdate"));
             }
         }
+        public List<Asteroid> Asteroids 
+        { 
+            get => _asteroids;
+            set
+            {
+                _asteroids = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Asteroids"));
+            }
+        }
+
 
         public AllAsteroidsPage()
         {
             InitializeComponent();
-            dtc = new DataControl();
+            dataControl = new DataControl();
 
-            asteroids = dtc.GetAllAsteroids();
-            lwAsteroids.ItemsSource = asteroids;
+            Asteroids = dataControl.GetAllAsteroids();
+            LastUpdate = DateTime.Now.ToString();
+
+            lwAsteroids.ItemsSource = Asteroids;
             BindingContext = this;
 
-            LastUpdate = DateTime.Now.ToString();
+            UpdateData();
+        }
+
+        private void UpdateData()
+        {
+            string lastUpdate = "";
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    Asteroids = dataControl.Update(out lastUpdate);
+                    LastUpdate = lastUpdate;
+                    Thread.Sleep(TimeSpan.FromMinutes(2));
+                }
+            });
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

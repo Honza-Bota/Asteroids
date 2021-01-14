@@ -65,6 +65,16 @@ namespace Asteroids.ViewModel
             return asteroids;
         }
 
+        internal List<Asteroid> Update(out string lastUpdate)
+        {
+            List<Asteroid> asteroids;
+
+            asteroids = GetAllAsteroids();
+            lastUpdate = DateTime.Now.ToString();
+
+            return asteroids;
+        }
+
         private CloseApproachData FindNearestApproach(List<CloseApproachData> l_cad)
         {
             List<int> years = new List<int>();
