@@ -26,7 +26,11 @@ namespace Asteroids.ViewModel
                 _lastUpdate = edit ? Application.Current.Properties["updateDate"].ToString() : DateTime.Now.ToString();
                 return asteroids;
             }
-            catch (Exception err) { throw new Exception(err.Message); }
+            catch (Exception err)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", err.Message, "Ok");
+                throw new Exception(err.Message);
+            }
         }
 
         async Task<NasaApiResponse> DownloadData()

@@ -9,13 +9,14 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Threading;
+using Xamarin.Essentials;
 
 namespace Asteroids.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllAsteroidsPage : ContentPage, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         DataControl dataControl;
 
@@ -64,6 +65,15 @@ namespace Asteroids.View
                 {
                     Asteroids = dataControl.Update(out lastUpdate);
                     LastUpdate = lastUpdate;
+
+                    if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                    {
+                        LabelLastUpadte.TextColor = Color.Gray;
+                    }
+                    else
+                    {
+                        LabelLastUpadte.TextColor = Color.Red;
+                    }
                 });
                 return true;
             });
